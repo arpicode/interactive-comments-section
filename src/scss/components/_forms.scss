@@ -1,0 +1,45 @@
+.add-comment-form {
+    margin-top: 1rem;
+}
+
+.reply-form {
+    margin-top: 0.5rem;
+}
+
+.add-comment-form,
+.reply-form {
+    display: grid;
+    gap: 1rem;
+    align-items: center;
+    grid-template-areas:
+        'area area'
+        'avatar btn';
+    background: $color-light;
+    border-radius: $border-radius-size;
+    padding: 1rem;
+
+    p {
+        grid-area: area;
+        width: 100%;
+    }
+
+    .btn-group {
+        grid-area: btn;
+        margin-left: auto;
+    }
+
+    .avatar {
+        grid-area: avatar;
+        width: 2.5rem;
+    }
+}
+
+@media screen and (min-width: $screen-mobile) {
+    .add-comment-form,
+    .reply-form {
+        padding: 1.5rem;
+        grid-template-areas: 'avatar area btn';
+        grid-auto-columns: min-content auto min-content;
+        align-items: start;
+    }
+}

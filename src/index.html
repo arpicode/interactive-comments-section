@@ -5,11 +5,213 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
     <title>Frontend Mentor | Interactive comments section</title>
 </head>
 
 <body>
 
+    <input type="checkbox" id="modal" hidden>
+    <aside class="modal">
+        <section class="message-box">
+            <h2>Delete comment</h2>
+            <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
+            <div class="btn-group">
+                <label for="modal"><a class="btn-secondary rounded-2" role="button">NO, CANCEL</label></a>
+                <label for="modal"><a class="btn-danger rounded-2" role="button">YES, DELETE</label></a>
+            </div>
+        </section>
+    </aside>
+
+    <div id="app" class="container p-2">
+
+        <main>
+
+            <article class="comment">
+
+                <section class="message">
+                    <header>
+                        <img class="avatar" src="./images/avatars/image-amyrobson.webp" alt="amyrobson's avatar">
+                        <h4 class="user-name"><a>amyrobson</a></h4>
+                        <time class="text-secondary" datetime="">1 month ago</time>
+                    </header>
+
+                    <p class="text-secondary">Impressive! Though it seems the drag feature could be improved. But
+                        overall it looks incredible. You've nailed the design and the responsiveness at various
+                        breakpoints works really well.</p>
+
+                    <div class="score-counter">
+                        <a class="btn-counter-plus" role="button"></a>
+                        <span class="counter-value">12</span>
+                        <a class="btn-counter-minus" role="button"></a>
+                    </div>
+
+                    <div class="actions-group">
+                        <a href="#" class="action-reply" role="button">Reply</a>
+                    </div>
+                </section>
+
+                <form class="reply-form">
+                    <p contenteditable="true" placeholder="Add your reply&hellip;"></p>
+                    <img class="avatar" src="./images/avatars/image-juliusomo.webp" alt="juliusomo's avatar">
+                    <div class="btn-group">
+                        <a href="#" class="btn-primary rounded-2" role="button">REPLY</a>
+                    </div>
+                </form>
+
+                <div class="replies"></div>
+            </article>
+
+            <article class="comment">
+
+                <section class="message">
+                    <header>
+                        <img class="avatar" src="./images/avatars/image-maxblagun.webp" alt="maxblagun's avatar">
+                        <h4 class="user-name"><a>maxblagun</a></h4>
+                        <time class="text-secondary" datetime="">2 weeks ago</time>
+                    </header>
+
+                    <p class="text-secondary">Woah, your project looks awesome! How long have you been coding for? I'm
+                        still new, but think I want to dive into React as well soon. Perhaps you can give me an insight
+                        on where I can learn React? Thanks!</p>
+
+                    <div class="score-counter">
+                        <a class="btn-counter-plus" role="button"></a>
+                        <span class="counter-value">5</span>
+                        <a class="btn-counter-minus" role="button"></a>
+                    </div>
+
+                    <div class="actions-group">
+                        <a href="#" class="action-reply" role="button">Reply</a>
+                    </div>
+                </section>
+
+                <div class="replies">
+                    <section class="message">
+                        <header>
+                            <img class="avatar" src="./images/avatars/image-ramsesmiron.webp"
+                                alt="ramsesmiron's avatar">
+                            <h4 class="user-name"><a>ramsesmiron</a></h4>
+                            <time class="text-secondary" datetime="">1 week ago</time>
+                        </header>
+
+                        <p class="text-secondary"><span class="at-user">@maxblagun</span> If you're still new, I'd
+                            recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's
+                            very tempting to jump ahead but lay a solid foundation first.</p>
+
+                        <div class="score-counter">
+                            <a class="btn-counter-plus" role="button"></a>
+                            <span class="counter-value">4</span>
+                            <a class="btn-counter-minus" role="button"></a>
+                        </div>
+
+                        <div class="actions-group">
+                            <a href="#" class="action-reply" role="button">Reply</a>
+                        </div>
+                    </section>
+
+                    <form class="reply-form">
+                        <p contenteditable="true" placeholder="Add your reply&hellip;"></p>
+                        <img class="avatar" src="./images/avatars/image-juliusomo.webp" alt="juliusomo's avatar">
+                        <div class="btn-group">
+                            <a href="#" class="btn-primary rounded-2" role="button">REPLY</a>
+                        </div>
+                    </form>
+
+                    <section class="message">
+                        <header>
+                            <img class="avatar" src="./images/avatars/image-juliusomo.webp" alt="juliusomo's avatar">
+                            <h4 class="user-name"><a>juliusomo</a><span class="current-user-badge">you</span></h4>
+                            <time class="text-secondary" datetime="">2 days ago</time>
+                        </header>
+
+                        <p class="text-secondary"><span class="at-user">@ramsesmiron</span> I couldn't agree more with
+                            this. Everything moves so fast and it always seems like everyone knows the newest
+                            library/framework. But the fundamentals are what stay constant.</p>
+
+                        <div class="score-counter">
+                            <a class="btn-counter-plus" role="button"></a>
+                            <span class="counter-value">2</span>
+                            <a class="btn-counter-minus" role="button"></a>
+                        </div>
+
+                        <div class="actions-group">
+                            <label for="modal"><a class="action-delete" role="button">Delete</a></label>
+                            <a href="#" class="action-edit" role="button">Edit</a>
+                        </div>
+                    </section>
+
+                    <section class="message update-form">
+                        <header>
+                            <img class="avatar" src="./images/avatars/image-juliusomo.webp" alt="juliusomo's avatar">
+                            <h4 class="user-name"><a>juliusomo</a><span class="current-user-badge">you</span></h4>
+                            <time class="text-secondary" datetime="">2 days ago</time>
+                        </header>
+                        <p class="text-secondary" contenteditable="true" placeholder="Edit your message&hellip;">
+                            @ramsesmiron I couldn't agree more with this. Everything moves so fast and it always seems
+                            like everyone knows the newest library/framework. But the fundamentals are what stay
+                            constant.</p>
+                        <div class="score-counter">
+                            <a class="btn-counter-plus" role="button"></a>
+                            <span class="counter-value">2</span>
+                            <a class="btn-counter-minus" role="button"></a>
+                        </div>
+                        <div class="actions-group">
+                            <label for="modal"><a class="action-delete" role="button">Delete</a></label>
+                            <a class="action-edit disabled-link" role="button">Edit</a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="#" class="btn-primary rounded-2">UPDATE</a>
+                        </div>
+                    </section>
+                </div>
+
+            </article>
+
+            <article class="comment" id="6">
+                <section class="message">
+                    <header>
+                        <img class="avatar" src="./images/avatars/image-juliusomo.webp" alt="juliusomo's avatar">
+                        <h4 class="user-name"><a>juliusomo</a>
+                            <span class="current-user-badge">you</span>
+                        </h4>
+                        <time class="text-secondary" datetime="">1 day</time>
+                    </header>
+                    <p class="text-secondary">New comment from Juju! &lt;script&gt;alert('BAD!')&lt;/script&gt;</p>
+                    <div class="score-counter">
+                        <a class="btn-counter-plus" role="button"></a>
+                        <span class="counter-value">0</span>
+                        <a class="btn-counter-minus" role="button"></a>
+                    </div>
+                    <div class="actions-group">
+                        <label for="modal">
+                            <a class="action-delete" data-message-id="6" role="button" data-action="delete">Delete</a>
+                        </label>
+                        <a href="#" class="action-edit" data-message-id="6" role="button" data-action="edit">Edit</a>
+                    </div>
+                </section>
+                <div class="replies"></div>
+            </article>
+        </main>
+
+        <form class="add-comment-form">
+            <p contenteditable="true" placeholder="Add a comment&hellip;"></p>
+            <img class="avatar" src="./images/avatars/image-juliusomo.webp" alt="juliusomo's avatar">
+            <div class="btn-group">
+                <a href="#" class="btn-primary rounded-2">SEND</a>
+            </div>
+        </form>
+    </div>
+
+    <footer class="attribution py-5">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+        Coded by <a href="https://github.com/arpicode">arpicode</a>.
+    </footer>
 </body>
 
 </html>

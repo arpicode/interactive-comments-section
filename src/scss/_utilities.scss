@@ -1,0 +1,151 @@
+@use 'sass:math';
+
+.text-secondary {
+    color: $color-gray-500;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.disabled-link {
+    color: currentColor;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+.avatar {
+    width: 2rem;
+}
+
+.at-user {
+    color: $color-accent;
+    font-weight: 500;
+}
+
+.current-user-badge {
+    display: inline-block;
+    background-color: $color-accent;
+    color: $color-light;
+    line-height: 1.3;
+    padding: 0.0625rem 0.4rem 0.125rem;
+    font-size: 0.77rem;
+    border-radius: 0.15rem;
+}
+
+/* replaces textareas */
+p[contenteditable='true'] {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid $color-gray-200;
+    border-radius: $border-radius-size;
+    overflow-wrap: anywhere;
+    color: $color-dark;
+    min-height: 6rem;
+
+    &:hover {
+        border-color: $color-gray-300;
+    }
+
+    &:focus {
+        outline: 1px solid $color-gray-900;
+    }
+
+    &:empty:before {
+        content: attr(placeholder);
+        pointer-events: none;
+        color: $color-gray-300;
+        display: block; /* For Firefox */
+    }
+}
+
+/* ----- Containers ----- */
+
+.container {
+    width: 100%;
+    min-width: $screen-min;
+    max-width: $screen-desktop;
+    margin: 0 auto;
+}
+
+/* ----- Spacing utilities ----- */
+
+/* Padding */
+@for $i from 0 through $spacing-steps {
+    $space: math.div($max-spacing, $spacing-steps);
+
+    .p-#{$i} {
+        padding: $i * $space;
+    }
+
+    .pt-#{$i} {
+        padding-top: $i * $space;
+    }
+
+    .pb-#{$i} {
+        padding-bottom: $i * $space;
+    }
+
+    .ps-#{$i} {
+        padding-inline-start: $i * $space;
+    }
+
+    .pe-#{$i} {
+        padding-inline-end: $i * $space;
+    }
+
+    .px-#{$i} {
+        padding-inline: $i * $space;
+    }
+
+    .py-#{$i} {
+        padding-block: $i * $space;
+    }
+}
+
+/* Margin */
+@for $i from 0 through $spacing-steps {
+    $space: math.div($max-spacing, $spacing-steps);
+
+    .m-#{$i} {
+        margin: $i * $space;
+    }
+
+    .mt-#{$i} {
+        margin-top: $i * $space;
+    }
+
+    .mb-#{$i} {
+        margin-bottom: $i * $space;
+    }
+
+    .ms-#{$i} {
+        margin-inline-start: $i * $space;
+    }
+
+    .me-#{$i} {
+        margin-inline-end: $i * $space;
+    }
+
+    .mx-#{$i} {
+        margin-inline: $i * $space;
+    }
+
+    .my-#{$i} {
+        margin-block: $i * $space;
+    }
+}
+
+/* ---- Border radius ---- */
+
+@for $i from 0 through $radius-steps {
+    $radius: math.div($max-radius, $radius-steps);
+
+    .rounded-#{$i} {
+        border-radius: $i * $radius;
+    }
+}
+
+.rounded-pill {
+    border-radius: 50rem;
+}

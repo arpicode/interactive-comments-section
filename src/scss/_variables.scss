@@ -1,0 +1,37 @@
+// Break points
+$screen-min: 375px +1;
+$screen-mobile: 700px +1;
+$screen-desktop: 1440px +1;
+
+// Colors
+$color-gray-900: hsl(212, 24%, 26%);
+$color-gray-500: hsl(211, 10%, 45%);
+$color-gray-400: hsl(211, 10%, 55%); //
+$color-gray-300: hsl(212, 10%, 70%); //
+$color-gray-200: hsl(223, 19%, 93%);
+$color-gray-100: hsl(228, 33%, 97%);
+
+$color-dark: $color-gray-900;
+$color-light: white;
+
+$color-secondary: $color-gray-500;
+
+$color-accent: hsl(238, 40%, 52%);
+$color-accent-200: hsl(239, 57%, 85%);
+
+$color-danger: hsl(358, 79%, 66%);
+$color-danger-200: hsl(357, 100%, 86%);
+
+// Fonts
+$font-family-body: Rubik, sans-serif;
+$font-size-body: 1rem;
+$line-height: 1.5;
+
+// Spacing
+$spacing-steps: 5;
+$max-spacing: 2.5rem;
+
+// Border radius
+$radius-steps: 4;
+$max-radius: 1rem;
+$border-radius-size: 0.75rem;

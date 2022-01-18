@@ -1,0 +1,33 @@
+@use 'sass:list';
+
+/* ----- Buttons ----- */
+$btn-types: (
+    // bg   color   bg:hover
+    'primary': $color-accent $color-light $color-accent-200,
+    'secondary': $color-gray-500 $color-light $color-gray-300,
+    'danger': $color-danger $color-light $color-danger-200
+);
+
+%btn {
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    width: 6.5rem;
+    height: 3rem;
+    text-align: center;
+    user-select: none;
+}
+
+@each $type in map-keys($btn-types) {
+    .btn-#{$type} {
+        @extend %btn;
+
+        background: list.nth(map-get($map: $btn-types, $key: $type), 1);
+        color: list.nth(map-get($map: $btn-types, $key: $type), 2);
+
+        &:hover,
+        &:focus {
+            background: list.nth(map-get($map: $btn-types, $key: $type), 3);
+        }
+    }
+}

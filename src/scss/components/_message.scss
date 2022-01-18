@@ -1,0 +1,71 @@
+@import './score-counter';
+@import './actions';
+
+.message {
+    display: grid;
+    gap: 1rem;
+    grid-template-areas:
+        'header header'
+        'body body'
+        'score actions';
+    grid-auto-columns: minmax(6rem, min-content) auto;
+    background: $color-light;
+    border-radius: $border-radius-size;
+    padding: 1rem;
+
+    header {
+        grid-area: header;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    p {
+        grid-area: body;
+    }
+
+    .user-name {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .btn-group {
+        display: none;
+    }
+
+    &.update-form {
+        /* add class to .message to be in edit mode: 
+        JS needs to set <p> attribute contenteditable="true" */
+        grid-template-areas:
+            'header header'
+            'body body'
+            'score actions'
+            '. btn';
+
+        .btn-group {
+            display: initial;
+            grid-area: btn;
+            margin-left: auto;
+        }
+    }
+}
+
+@media screen and (min-width: $screen-mobile) {
+    .message {
+        grid-auto-columns: min-content auto 1fr;
+        column-gap: 1.5rem;
+        grid-template-areas:
+            'score header actions'
+            'score body body';
+        padding: 1.5rem;
+
+        &.update-form {
+            grid-template-areas:
+                'score header actions'
+                'score body body'
+                '. . btn';
+        }
+    }
+}

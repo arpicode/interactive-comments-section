@@ -1,0 +1,23 @@
+@import './variables';
+@import './utilities';
+@import './reset';
+@import './layout';
+
+@import './components/buttons';
+@import './components/message';
+@import './components/forms';
+@import './components/modal';
+
+footer {
+    font-size: 0.8rem;
+    text-align: center;
+    color: $color-gray-500;
+
+    a {
+        color: $color-gray-900;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
