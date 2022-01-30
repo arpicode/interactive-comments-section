@@ -19,7 +19,23 @@ Render.lastComment = (state) => {
     renderComment(last, state.currentUser)
 }
 
+Render.replyForm = (targetMessageId, currentUser) => {
+    renderReplyForm(targetMessageId, currentUser)
+}
+
+Render.lastReply = (state, targetCommentId) => {
+    const lastComment = state.comments.find((comment) => comment.id == targetCommentId)
+    const lastReply = lastComment.replies[lastComment.replies.length - 1]
+    renderReply(lastReply, targetCommentId, state.currentUser)
+}
+
 /* ----- Forms ----- */
+
+const renderReply = (reply, targetCommentId, currentUser) => {
+    const targetComment = document.getElementById(targetCommentId)
+    const repliesDiv = targetComment.parentElement.querySelector('.replies')
+    repliesDiv.insertAdjacentHTML('beforeend', buildReplyHtml(reply, currentUser))
+}
 
 const renderAddCommentForm = (currentUser) => {
     const container = document.querySelector('main')
@@ -33,6 +49,25 @@ const buildAddCommentFormHtml = (currentUser) => {
             <img class="avatar" src="${currentUser.image.webp}" alt="${currentUser.username}'s avatar">
             <div class="btn-group">
                 <a href="#" class="btn-primary rounded-2">SEND</a>
+            </div>
+        </form>`
+    return html
+}
+
+const renderReplyForm = (targetMessageId, currentUser) => {
+    const targetMessage = document.getElementById(targetMessageId)
+    targetMessage.insertAdjacentHTML('afterend', buildReplyFormHtml(targetMessageId, currentUser))
+    targetMessage.querySelector('.action-reply').classList.add('disabled-link')
+    document.querySelector(`[data-target-id="${targetMessageId}"]`).focus()
+}
+
+const buildReplyFormHtml = (targetMessageId, currentUser) => {
+    const html = `
+        <form class="reply-form">
+            <p contenteditable="true" data-target-id="${targetMessageId}" placeholder="Add your reply&hellip;"></p>
+            <img class="avatar" src="${currentUser.image.webp}" alt="${currentUser.username}'s avatar">
+            <div class="btn-group">
+                <a href="#" data-target-id="${targetMessageId}" data-action="addReply" class="btn-primary rounded-2" role="button">REPLY</a>
             </div>
         </form>`
     return html
@@ -87,7 +122,7 @@ const buildCommentHtml = (comment, currentUser) => {
 
             <div class="replies">`
     comment.replies.forEach((r) => {
-        html += buildReplyHtml(r, currentUser)
+        html += buildReplyHtml(r, currentUser, comment.id)
     })
 
     html += `
@@ -97,11 +132,11 @@ const buildCommentHtml = (comment, currentUser) => {
     return html
 }
 
-const buildReplyHtml = (reply, currentUser) => {
+const buildReplyHtml = (reply, currentUser, commentId) => {
     const author = reply.user.username
     const isCurrentUser = author === currentUser.username
     let html = `
-        <section class="message" id="${reply.id}">
+        <section class="message" id="${reply.id}" data-parent-id="${commentId}">
             <header>
                 <img class="avatar" src="${reply.user.image.webp}" alt="${author}'s avatar">
                 <h4 class="user-name"><a href="#">${author}</a>

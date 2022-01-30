@@ -23,8 +23,14 @@ export class State {
         }
     }
 
-    addComment(msg) {
-        this.comments.push(this._createComment(msg))
+    addComment(messageContent) {
+        this.comments.push(this._createComment(messageContent))
+        this.saveState()
+    }
+
+    addReply(messageContent, targetCommentId, targetUser) {
+        const targetComment = this.comments.find((comment) => comment.id == targetCommentId)
+        targetComment.replies.push(this._createReply(messageContent, targetUser))
         this.saveState()
     }
 
@@ -54,15 +60,27 @@ export class State {
         return isMessageRemoved
     }
 
-    _createComment(msg) {
+    _createComment(commentContent) {
         return {
             id: uuid(),
-            content: msg,
+            content: commentContent,
             createdAt: new Date(),
             timestamp: Date.now(),
             score: 0,
             user: this.currentUser,
             replies: [],
+        }
+    }
+
+    _createReply(replyContent, targetReplyUser) {
+        return {
+            id: uuid(),
+            content: replyContent,
+            createdAt: new Date(),
+            timestamp: Date.now(),
+            score: 0,
+            user: this.currentUser,
+            replyingTo: targetReplyUser,
         }
     }
 }

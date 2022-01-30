@@ -60,7 +60,7 @@ export class App {
     actionsHandler(event) {
         const el = event.target
         const action = el.dataset.action
-        console.log(el)
+        // console.log(el)
 
         switch (action) {
             case undefined:
@@ -70,9 +70,14 @@ export class App {
                 break
             case 'edit':
                 console.log('edit')
+                // TODO
                 break
             case 'reply':
-                console.log('reply')
+                this.openReplyFormHandler(event)
+                break
+            case 'addReply':
+                this.addReplyHandler(event)
+                // TODO
                 break
             case 'upvote':
                 // TODO
@@ -102,5 +107,36 @@ export class App {
     deleteActionHandler(event) {
         const modal = document.querySelector('.modal')
         modal.dataset.idToDelete = event.target.dataset.messageId
+    }
+
+    openReplyFormHandler(event) {
+        const id = event.target.dataset.messageId
+        Render.replyForm(id, this.state.currentUser)
+    }
+
+    addReplyHandler(event) {
+        event.preventDefault()
+        const replyBtn = event.target
+        const replyForm = replyBtn.parentElement.parentElement
+        let message = replyForm.querySelector('p')
+
+        const targetMessageId = message.dataset.targetId
+        const targetUser = document.querySelector(
+            `[id="${targetMessageId}"] .user-name a`
+        ).textContent
+
+        message = message.textContent.trim()
+
+        // Since a reply doesn't have replies, check if current reply targets a reply and if so, get the id of parent comment.
+        const replyParentId = document.getElementById(targetMessageId).dataset.parentId
+
+        if (message !== '') {
+            this.state.addReply(message, replyParentId || targetMessageId, targetUser)
+            Render.lastReply(this.state, replyParentId || targetMessageId)
+        }
+
+        const replyActionBtn = document.querySelector(`[id="${targetMessageId}"] .action-reply`)
+        replyActionBtn.classList.remove('disabled-link')
+        replyForm.remove()
     }
 }
