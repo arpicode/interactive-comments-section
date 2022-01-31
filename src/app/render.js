@@ -86,7 +86,7 @@ const buildCommentHtml = (comment, currentUser) => {
 
     let html = `
         <article class="comment">
-            <section class="message" id="${comment.id}">
+            <section class="message animate-message animate-fadeIn" id="${comment.id}">
                 <header>
                     <img class="avatar" src="${comment.user.image.webp}" alt="${author}'s avatar">
                     <h4 class="user-name"><a>${author}</a>
@@ -136,7 +136,8 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
     const author = reply.user.username
     const isCurrentUser = author === currentUser.username
     let html = `
-        <section class="message" id="${reply.id}" data-parent-id="${commentId}">
+        <section class="message animate-message animate-fadeIn"
+                 id="${reply.id}" data-parent-id="${commentId}">
             <header>
                 <img class="avatar" src="${reply.user.image.webp}" alt="${author}'s avatar">
                 <h4 class="user-name"><a href="#">${author}</a>
