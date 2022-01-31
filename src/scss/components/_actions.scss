@@ -7,6 +7,7 @@
     justify-content: flex-end;
 
     a {
+        display: inline-block;
         cursor: pointer;
         font-weight: 500;
         color: $color-accent;
