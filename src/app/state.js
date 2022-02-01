@@ -60,6 +60,25 @@ export class State {
         return isMessageRemoved
     }
 
+    updateMessage(msgId, messageContent) {
+        const message = this.getMessageById(msgId)
+        if (message) {
+            message.content = messageContent.trim()
+            this.saveState()
+        }
+    }
+
+    getMessageById(id) {
+        for (let i = 0; i < this.comments.length; i++) {
+            if (this.comments[i].id == id) return this.comments[i]
+
+            const msg = this.comments[i].replies.find((reply) => reply.id == id)
+
+            if (msg) return msg
+        }
+        return null
+    }
+
     _createComment(commentContent) {
         return {
             id: uuid(),

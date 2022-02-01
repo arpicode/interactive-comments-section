@@ -69,8 +69,7 @@ export class App {
                 this.deleteActionHandler(event)
                 break
             case 'edit':
-                console.log('edit')
-                // TODO
+                this.editMessageHandler(event)
                 break
             case 'reply':
                 this.openReplyFormHandler(event)
@@ -127,7 +126,7 @@ export class App {
 
         message = message.textContent.trim()
 
-        // Since a reply doesn't have replies, check if current reply targets a reply and if so, get the id of parent comment.
+        // Since a reply doesn't have replies, check if current reply targets a reply and if so, use the id of parent comment.
         const replyParentId = document.getElementById(targetMessageId).dataset.parentId
 
         if (message !== '') {
@@ -138,5 +137,41 @@ export class App {
         const replyActionBtn = document.querySelector(`[id="${targetMessageId}"] .action-reply`)
         replyActionBtn.classList.remove('disabled-link')
         replyForm.remove()
+    }
+
+    editMessageHandler(event) {
+        const messageId = event.target.dataset.messageId
+        const message = document.getElementById(messageId)
+        const textarea = message.querySelector('p')
+        const updateBtn = message.querySelector('.btn-group a')
+        const replyToSpan = textarea.querySelector('.at-user')
+
+        message.classList.add('update-form')
+
+        if (replyToSpan) {
+            replyToSpan.remove()
+            textarea.textContent = `${replyToSpan.textContent} ${textarea.textContent.trim()}`
+        }
+        textarea.focus()
+
+        updateBtn.addEventListener('click', this.updateMessageHandler.bind(this, messageId), {
+            once: true,
+        })
+
+        textarea.setAttribute('contenteditable', 'true')
+    }
+
+    updateMessageHandler(msgId, event) {
+        event.preventDefault()
+        const message = document.getElementById(msgId)
+        if (message) {
+            const messageContent = message
+                .querySelector('p')
+                .textContent.replace(/^\s*@[\w]+\s+/gm, '')
+            this.state.updateMessage(msgId, messageContent)
+            Render.updatedMessage(this.state, msgId)
+        }
+        message.classList.remove('update-form')
+        message.querySelector('p').removeAttribute('contenteditable')
     }
 }

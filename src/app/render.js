@@ -29,6 +29,11 @@ Render.lastReply = (state, targetCommentId) => {
     renderReply(lastReply, targetCommentId, state.currentUser)
 }
 
+Render.updatedMessage = (state, messageId) => {
+    const message = state.getMessageById(messageId)
+    renderUpdatedMessage(message, messageId)
+}
+
 /* ----- Forms ----- */
 
 const renderReply = (reply, targetCommentId, currentUser) => {
@@ -118,6 +123,9 @@ const buildCommentHtml = (comment, currentUser) => {
     }
     html += `
                 </div>
+                <div class="btn-group">
+                    <a href="#" class="btn-primary rounded-2">UPDATE</a>
+                </div>
             </section>
 
             <div class="replies">`
@@ -149,7 +157,9 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
             </header>
 
             <p class="text-secondary">
-                <span class="at-user">@${reply.replyingTo}</span> ${reply.content}
+                <span class="at-user">@${reply.replyingTo}</span> ${htmlentities.encode(
+        reply.content
+    )}
             </p>
 
             <div class="score-counter">
@@ -169,6 +179,24 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
     }
     html += `
             </div>
+            <div class="btn-group">
+                <a href="#" class="btn-primary rounded-2">UPDATE</a>
+            </div>
         </section>`
+    return html
+}
+
+const renderUpdatedMessage = (message, msgId) => {
+    const msgElement = document.getElementById(msgId)
+    msgElement.querySelector('p').innerHTML = buildUpdatedMessageHtml(message)
+}
+
+const buildUpdatedMessageHtml = (message) => {
+    let html = ''
+    if (message?.replyingTo) {
+        html += `
+            <span class="at-user">@${message.replyingTo}</span> `
+    }
+    html += `${htmlentities.encode(message.content)}`
     return html
 }
