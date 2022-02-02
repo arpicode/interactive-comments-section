@@ -36,12 +36,6 @@ Render.updatedMessage = (state, messageId) => {
 
 /* ----- Forms ----- */
 
-const renderReply = (reply, targetCommentId, currentUser) => {
-    const targetComment = document.getElementById(targetCommentId)
-    const repliesDiv = targetComment.parentElement.querySelector('.replies')
-    repliesDiv.insertAdjacentHTML('beforeend', buildReplyHtml(reply, currentUser))
-}
-
 const renderAddCommentForm = (currentUser) => {
     const container = document.querySelector('main')
     container.insertAdjacentHTML('afterend', buildAddCommentFormHtml(currentUser))
@@ -98,16 +92,18 @@ const buildCommentHtml = (comment, currentUser) => {
                         ${isCurrentUser ? '<span class="current-user-badge">you</span>' : ''}
                     </h4>
                     <time class="text-secondary" datetime="${comment.createdAt}">
-                        ${convertTimestamp(comment.timestamp)}
+                        ${convertTimestamp(comment.timestamp)} ago
                     </time>
                 </header>
 
                 <p class="text-secondary">${htmlentities.encode(comment.content)}</p>
 
                 <div class="score-counter">
-                    <a class="btn-counter-plus" role="button"></a>
+                    <a class="btn-counter-plus" data-action="upvote" data-message-id="${comment.id}"
+                        role="button"></a>
                     <span class="counter-value">${comment.score}</span>
-                    <a class="btn-counter-minus" role="button"></a>
+                    <a class="btn-counter-minus" data-action="downvote"
+                        data-message-id="${comment.id}" role="button"></a>
                 </div>
 
                 <div class="actions-group">`
@@ -140,6 +136,12 @@ const buildCommentHtml = (comment, currentUser) => {
     return html
 }
 
+const renderReply = (reply, targetCommentId, currentUser) => {
+    const targetComment = document.getElementById(targetCommentId)
+    const repliesDiv = targetComment.parentElement.querySelector('.replies')
+    repliesDiv.insertAdjacentHTML('beforeend', buildReplyHtml(reply, currentUser))
+}
+
 const buildReplyHtml = (reply, currentUser, commentId) => {
     const author = reply.user.username
     const isCurrentUser = author === currentUser.username
@@ -148,11 +150,11 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
                  id="${reply.id}" data-parent-id="${commentId}">
             <header>
                 <img class="avatar" src="${reply.user.image.webp}" alt="${author}'s avatar">
-                <h4 class="user-name"><a href="#">${author}</a>
+                <h4 class="user-name"><a>${author}</a>
                     ${isCurrentUser ? '<span class="current-user-badge">you</span>' : ''}
                 </h4>
                 <time class="text-secondary" datetime="${reply.createdAt}">
-                    ${convertTimestamp(reply.timestamp)}
+                    ${convertTimestamp(reply.timestamp)} ago
                 </time>
             </header>
 
@@ -163,9 +165,11 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
             </p>
 
             <div class="score-counter">
-                <a class="btn-counter-plus" data-message-id="${reply.id}" role="button"></a>
+                <a class="btn-counter-plus" data-action="upvote" data-message-id="${reply.id}"
+                    role="button"></a>
                 <span class="counter-value">${reply.score}</span>
-                <a class="btn-counter-minus" data-message-id="${reply.id}" role="button"></a>
+                <a class="btn-counter-minus" data-action="downvote" data-message-id="${reply.id}"
+                    role="button"></a>
             </div>
 
             <div class="actions-group">`
