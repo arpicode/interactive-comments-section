@@ -8,6 +8,9 @@ This is a solution to the [Interactive comments section challenge on Frontend Me
     -   [The challenge](#the-challenge)
     -   [Screenshot](#screenshot)
     -   [Links](#links)
+-   [My process](#my-process)
+    -   [Built with](#built-with)
+    -   [TODOs](#todos)
 -   [Author](#author)
 -   [Acknowledgments](#acknowledgments)
 
@@ -30,8 +33,26 @@ Users should be able to:
 
 ### Links
 
--   Solution URL: [Add solution URL here](https://your-solution-url.com)
--   Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+-   Solution URL: [View on GitHub](https://github.com/arpicode/interactive-comments-section)
+-   Live Site URL: [View demo on Netlify](https://arpicode-interactive-comments-section.netlify.app/)
+
+## My process
+
+### Built with
+
+-   Semantic HTML5 markup
+-   SCSS for styles
+-   Mobile-first workflow
+-   Vanilla JS
+-   Webpack 5
+
+### TODOs
+
+This is a first version that meets the requirements of the challenge + bonuses. I will probably continue working on some features:
+
+-   Keyboard navigation for better accessibility
+-   Finish animations (like when deleting a message)
+-   Some refactoring
 
 ## Author
 
