@@ -2,12 +2,14 @@ input[id='modal'] {
     display: none;
 
     &:checked ~ .modal {
-        display: none;
+        // display: none;
+        display: grid;
     }
 }
 
 .modal {
-    display: grid;
+    // display: grid;
+    display: none;
     place-items: center;
     height: 100vh;
     width: 100%;
