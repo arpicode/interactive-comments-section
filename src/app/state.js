@@ -40,14 +40,12 @@ export class State {
         if (id) {
             for (let i = 0; i < this.comments.length; i++) {
                 if (this.comments[i].id == id) {
-                    console.log(`remove comment ${id} at index ${i}`)
                     isMessageRemoved = !!this.comments.splice(i, 1)
                     break
                 }
 
                 const index = this.comments[i].replies.findIndex((reply) => reply.id == id)
                 if (index !== -1) {
-                    console.log(`remove reply ${id} at index ${index}`)
                     isMessageRemoved = !!this.comments[i].replies.splice(index, 1)
                     break
                 }
