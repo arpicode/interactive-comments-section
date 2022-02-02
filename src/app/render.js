@@ -118,6 +118,7 @@ const renderComment = (comment, currentUser) => {
 const buildCommentHtml = (comment, currentUser) => {
     const author = comment.user.username
     const isCurrentUser = author === currentUser.username
+    const ts = convertTimestamp(comment.timestamp)
 
     let html = `
         <article class="comment">
@@ -128,7 +129,7 @@ const buildCommentHtml = (comment, currentUser) => {
                         ${isCurrentUser ? '<span class="current-user-badge">you</span>' : ''}
                     </h4>
                     <time class="text-secondary" datetime="${comment.createdAt}">
-                        ${convertTimestamp(comment.timestamp)} ago
+                        ${ts}${ts !== 'now' ? ' ago' : ''}
                     </time>
                 </header>
 
@@ -181,6 +182,8 @@ const renderReply = (reply, targetCommentId, currentUser) => {
 const buildReplyHtml = (reply, currentUser, commentId) => {
     const author = reply.user.username
     const isCurrentUser = author === currentUser.username
+    const ts = convertTimestamp(reply.timestamp)
+
     let html = `
         <section class="message animate-message animate-fadeIn"
                  id="${reply.id}" data-parent-id="${commentId}">
@@ -190,7 +193,7 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
                     ${isCurrentUser ? '<span class="current-user-badge">you</span>' : ''}
                 </h4>
                 <time class="text-secondary" datetime="${reply.createdAt}">
-                    ${convertTimestamp(reply.timestamp)} ago
+                    ${ts}${ts !== 'now' ? ' ago' : ''}
                 </time>
             </header>
 
