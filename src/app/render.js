@@ -7,6 +7,13 @@ Render.dom = (state) => {
     const comments = state.comments
     const currentUser = state.currentUser
 
+    if (!document.querySelector('main')) {
+        // Render initial markup
+        renderDeleteModal()
+        const mainEl = document.createElement('main')
+        document.querySelector('#app').appendChild(mainEl)
+    }
+
     comments.forEach((c) => {
         renderComment(c, currentUser)
     })
@@ -38,6 +45,29 @@ Render.messageScore = (state, messageId) => {
     const message = state.getMessageById(messageId)
     const scoreValue = document.querySelector(`[id="${messageId}"] .counter-value`)
     scoreValue.textContent = message.score
+}
+
+/* ----- Modal ----- */
+
+const renderDeleteModal = () => {
+    document.body.insertAdjacentHTML('afterbegin', buildDeleteModalHtml())
+}
+
+const buildDeleteModalHtml = () => {
+    const html = `
+        <input type="checkbox" id="modal" hidden>
+        <aside class="modal">
+            <section class="message-box">
+                <h2>Delete comment</h2>
+                <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
+                <div class="btn-group">
+                    <label for="modal"><a class="btn-secondary rounded-2" role="button">NO, CANCEL</label></a>
+                    <label for="modal"><a class="btn-danger rounded-2" role="button">YES, DELETE</label></a>
+                </div>
+            </section>
+        </aside>`
+
+    return html
 }
 
 /* ----- Forms ----- */
