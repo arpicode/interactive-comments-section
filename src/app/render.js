@@ -34,6 +34,12 @@ Render.updatedMessage = (state, messageId) => {
     renderUpdatedMessage(message, messageId)
 }
 
+Render.messageScore = (state, messageId) => {
+    const message = state.getMessageById(messageId)
+    const scoreValue = document.querySelector(`[id="${messageId}"] .counter-value`)
+    scoreValue.textContent = message.score
+}
+
 /* ----- Forms ----- */
 
 const renderAddCommentForm = (currentUser) => {

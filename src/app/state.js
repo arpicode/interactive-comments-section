@@ -38,8 +38,6 @@ export class State {
         let isMessageRemoved = false
 
         if (id) {
-            console.log('looking for id', id)
-
             for (let i = 0; i < this.comments.length; i++) {
                 if (this.comments[i].id == id) {
                     console.log(`remove comment ${id} at index ${i}`)
@@ -57,6 +55,7 @@ export class State {
 
             if (isMessageRemoved) this.saveState()
         }
+
         return isMessageRemoved
     }
 
@@ -77,6 +76,18 @@ export class State {
             if (msg) return msg
         }
         return null
+    }
+
+    scoreMessage(msgId, action) {
+        const message = this.getMessageById(msgId)
+        if (message) {
+            if (message.user.username !== this.currentUser.username) {
+                action === 'upvote' ? message.score++ : message.score--
+            } else {
+                console.log(`%cYou can't vote for your own messages.`, 'color: #e6b079;')
+            }
+        }
+        this.saveState()
     }
 
     _createComment(commentContent) {

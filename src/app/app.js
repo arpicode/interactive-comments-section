@@ -60,7 +60,6 @@ export class App {
     actionsHandler(event) {
         const el = event.target
         const action = el.dataset.action
-        // console.log(el)
 
         switch (action) {
             case undefined:
@@ -76,13 +75,12 @@ export class App {
                 break
             case 'addReply':
                 this.addReplyHandler(event)
-                // TODO
                 break
             case 'upvote':
-                // TODO
+                this.voteMessageHandler(event)
                 break
             case 'downvote':
-                // TODO
+                this.voteMessageHandler(event)
                 break
 
             default:
@@ -173,5 +171,11 @@ export class App {
         }
         message.classList.remove('update-form')
         message.querySelector('p').removeAttribute('contenteditable')
+    }
+
+    voteMessageHandler(event) {
+        const messageId = event.target.dataset.messageId
+        this.state.scoreMessage(messageId, event.target.dataset.action)
+        Render.messageScore(this.state, messageId)
     }
 }
