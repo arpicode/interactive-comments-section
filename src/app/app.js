@@ -45,13 +45,21 @@ export class App {
 
         if (id !== undefined && this.state.removeMessage(id)) {
             const message = document.getElementById(id)
-            console.log(
-                `%cRemoving comment %c${id} %cfrom DOM.`,
-                'color: #6de09b;',
-                'color: #c9c9c9;',
-                'color: #6de09b;'
+            message.addEventListener(
+                'animationend',
+                (e) => {
+                    e.stopPropagation()
+                    e.target.remove()
+                    console.log(
+                        `%cRemoving comment %c${id} %cfrom DOM.`,
+                        'color: #6de09b;',
+                        'color: #c9c9c9;',
+                        'color: #6de09b;'
+                    )
+                },
+                { once: true }
             )
-            message?.remove()
+            message.classList.add('animate-fadeOut')
             return
         }
         console.log('%cMissing id for delete action.', 'color: #e6b079;')

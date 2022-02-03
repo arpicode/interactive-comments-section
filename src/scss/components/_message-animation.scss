@@ -1,5 +1,5 @@
 .animate-message {
-    animation-duration: 1s;
+    animation-duration: 0.5s;
     animation-fill-mode: both;
 }
 
@@ -26,6 +26,7 @@
         opacity: 0;
         max-height: 0;
         margin-top: 0;
+        padding-block: 0;
     }
 }
 
