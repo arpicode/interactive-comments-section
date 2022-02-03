@@ -16,6 +16,8 @@ $btn-types: (
     height: 3rem;
     text-align: center;
     user-select: none;
+    border: none;
+    font: inherit;
 }
 
 @each $type in map-keys($btn-types) {

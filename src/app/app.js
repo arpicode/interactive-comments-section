@@ -12,7 +12,7 @@ export class App {
             main: document.querySelector('main'),
             btnCancelModal: document.querySelector('.modal .btn-secondary'),
             btnConfirmDelete: document.querySelector('.modal .btn-danger'),
-            btnAddComment: document.querySelector('.add-comment-form a'),
+            btnAddComment: document.querySelector('.add-comment-form button'),
         }
 
         this.bindAppEvents()

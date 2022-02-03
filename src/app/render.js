@@ -83,7 +83,7 @@ const buildAddCommentFormHtml = (currentUser) => {
             <p contenteditable="true" placeholder="Add a comment&hellip;"></p>
             <img class="avatar" src="${currentUser.image.webp}" alt="${currentUser.username}'s avatar">
             <div class="btn-group">
-                <a href="#" class="btn-primary rounded-2">SEND</a>
+                <button class="btn-primary rounded-2" type="submit">SEND</a>
             </div>
         </form>`
     return html
@@ -137,10 +137,10 @@ const buildCommentHtml = (comment, currentUser) => {
 
                 <div class="score-counter">
                     <a class="btn-counter-plus" data-action="upvote" data-message-id="${comment.id}"
-                        role="button"></a>
+                        role="button" aria-label="upvote"></a>
                     <span class="counter-value">${comment.score}</span>
                     <a class="btn-counter-minus" data-action="downvote"
-                        data-message-id="${comment.id}" role="button"></a>
+                        data-message-id="${comment.id}" role="button" aria-label="downvote"></a>
                 </div>
 
                 <div class="actions-group">`
@@ -205,10 +205,10 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
 
             <div class="score-counter">
                 <a class="btn-counter-plus" data-action="upvote" data-message-id="${reply.id}"
-                    role="button"></a>
+                    role="button" aria-label="upvote"></a>
                 <span class="counter-value">${reply.score}</span>
                 <a class="btn-counter-minus" data-action="downvote" data-message-id="${reply.id}"
-                    role="button"></a>
+                    role="button" aria-label="downvote"></a>
             </div>
 
             <div class="actions-group">`
