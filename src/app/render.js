@@ -80,7 +80,7 @@ const renderAddCommentForm = (currentUser) => {
 const buildAddCommentFormHtml = (currentUser) => {
     const html = `
         <form class="add-comment-form">
-            <p contenteditable="true" placeholder="Add a comment&hellip;"></p>
+            <p contenteditable="true" data-placeholder="Add a comment&hellip;"></p>
             <img class="avatar" src="${currentUser.image.webp}" alt="${currentUser.username}'s avatar">
             <div class="btn-group">
                 <button class="btn-primary rounded-2" type="submit">SEND</a>
@@ -99,7 +99,7 @@ const renderReplyForm = (targetMessageId, currentUser) => {
 const buildReplyFormHtml = (targetMessageId, currentUser) => {
     const html = `
         <form class="reply-form">
-            <p contenteditable="true" data-target-id="${targetMessageId}" placeholder="Add your reply&hellip;"></p>
+            <p contenteditable="true" data-target-id="${targetMessageId}" data-placeholder="Add your reply&hellip;"></p>
             <img class="avatar" src="${currentUser.image.webp}" alt="${currentUser.username}'s avatar">
             <div class="btn-group">
                 <a href="#" data-target-id="${targetMessageId}" data-action="addReply" class="btn-primary rounded-2" role="button">REPLY</a>

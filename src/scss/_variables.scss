@@ -1,7 +1,8 @@
 // Break points
 $screen-min: 375px +1;
 $screen-mobile: 700px +1;
-$screen-desktop: 1440px +1;
+// $screen-desktop: 1440px +1; // Value stated in the style-guide
+$screen-desktop: 760px +1; // Expected size for solutions
 
 // Colors
 $color-gray-900: hsl(212, 24%, 26%);

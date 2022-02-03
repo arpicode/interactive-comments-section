@@ -52,9 +52,9 @@ p[contenteditable='true'] {
     }
 
     &:empty:before {
-        content: attr(placeholder);
+        content: attr(data-placeholder);
         pointer-events: none;
-        color: $color-gray-300;
+        color: $color-gray-400;
         display: block; /* For Firefox */
     }
 }
