@@ -115,6 +115,7 @@ export class App {
     }
 
     openReplyFormHandler(event) {
+        event.preventDefault()
         const id = event.target.dataset.messageId
         Render.replyForm(id, this.state.currentUser)
     }
@@ -146,6 +147,7 @@ export class App {
     }
 
     editMessageHandler(event) {
+        event.preventDefault()
         const messageId = event.target.dataset.messageId
         const message = document.getElementById(messageId)
         const textarea = message.querySelector('p')
@@ -158,13 +160,13 @@ export class App {
             replyToSpan.remove()
             textarea.textContent = `${replyToSpan.textContent} ${textarea.textContent.trim()}`
         }
-        textarea.focus()
 
         updateBtn.addEventListener('click', this.updateMessageHandler.bind(this, messageId), {
             once: true,
         })
 
         textarea.setAttribute('contenteditable', 'true')
+        textarea.focus()
     }
 
     updateMessageHandler(msgId, event) {
@@ -182,6 +184,7 @@ export class App {
     }
 
     voteMessageHandler(event) {
+        event.preventDefault()
         const messageId = event.target.dataset.messageId
         this.state.scoreMessage(messageId, event.target.dataset.action)
         Render.messageScore(this.state, messageId)

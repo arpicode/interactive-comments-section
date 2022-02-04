@@ -56,9 +56,9 @@ const renderDeleteModal = () => {
 const buildDeleteModalHtml = () => {
     const html = `
         <input type="checkbox" id="modal" hidden>
-        <aside class="modal">
+        <aside class="modal" role="dialog" aria-modal="true" aria-live="assertive" aria-labelledby="modal-title">
             <section class="message-box">
-                <h2>Delete comment</h2>
+                <h2 id="modal-title">Delete comment</h2>
                 <p>Are you sure you want to delete this comment? This will remove the comment and can't be undone.</p>
                 <div class="btn-group">
                     <label for="modal"><a class="btn-secondary rounded-2" role="button">NO, CANCEL</label></a>
@@ -136,10 +136,10 @@ const buildCommentHtml = (comment, currentUser) => {
                 <p class="text-secondary">${htmlentities.encode(comment.content)}</p>
 
                 <div class="score-counter">
-                    <a class="btn-counter-plus" data-action="upvote" data-message-id="${comment.id}"
-                        role="button" aria-label="upvote"></a>
+                    <a href="#" class="btn-counter-plus" data-action="upvote"
+                       data-message-id="${comment.id}" role="button" aria-label="upvote"></a>
                     <span class="counter-value">${comment.score}</span>
-                    <a class="btn-counter-minus" data-action="downvote"
+                    <a href="#" class="btn-counter-minus" data-action="downvote"
                         data-message-id="${comment.id}" role="button" aria-label="downvote"></a>
                 </div>
 
@@ -149,10 +149,10 @@ const buildCommentHtml = (comment, currentUser) => {
                     <label for="modal">
                         <a class="action-delete" data-message-id="${comment.id}" role="button" data-action="delete">Delete</a>
                     </label>
-                    <a class="action-edit" data-message-id="${comment.id}" role="button" data-action="edit">Edit</a>`
+                    <a href="#" class="action-edit" data-message-id="${comment.id}" role="button" data-action="edit">Edit</a>`
     } else {
         html += `
-                    <a class="action-reply" data-message-id="${comment.id}" role="button" data-action="reply">Reply</a>`
+                    <a href="#" class="action-reply" data-message-id="${comment.id}" role="button" data-action="reply">Reply</a>`
     }
     html += `
                 </div>
@@ -204,21 +204,21 @@ const buildReplyHtml = (reply, currentUser, commentId) => {
             </p>
 
             <div class="score-counter">
-                <a class="btn-counter-plus" data-action="upvote" data-message-id="${reply.id}"
-                    role="button" aria-label="upvote"></a>
+                <a href="#" class="btn-counter-plus" data-action="upvote"
+                   data-message-id="${reply.id}" role="button" aria-label="upvote"></a>
                 <span class="counter-value">${reply.score}</span>
-                <a class="btn-counter-minus" data-action="downvote" data-message-id="${reply.id}"
-                    role="button" aria-label="downvote"></a>
+                <a href="#" class="btn-counter-minus" data-action="downvote"
+                   data-message-id="${reply.id}" role="button" aria-label="downvote"></a>
             </div>
 
             <div class="actions-group">`
     if (isCurrentUser) {
         html += `
                 <label for="modal"><a class="action-delete" data-message-id="${reply.id}" role="button" data-action="delete">Delete</a></label>
-                <a class="action-edit" data-message-id="${reply.id}" role="button" data-action="edit">Edit</a>`
+                <a href="#" class="action-edit" data-message-id="${reply.id}" role="button" data-action="edit">Edit</a>`
     } else {
         html += `
-                <a class="action-reply" data-message-id="${reply.id}" role="button" data-action="reply">Reply</a>`
+                <a href="#" class="action-reply" data-message-id="${reply.id}" role="button" data-action="reply">Reply</a>`
     }
     html += `
             </div>
