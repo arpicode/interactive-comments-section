@@ -98,7 +98,7 @@ const renderReplyForm = (targetMessageId, currentUser) => {
 
 const buildReplyFormHtml = (targetMessageId, currentUser) => {
     const html = `
-        <form class="reply-form">
+        <form class="reply-form animate-form animate-fadeIn">
             <p contenteditable="true" data-target-id="${targetMessageId}" data-placeholder="Add your reply&hellip;"></p>
             <img class="avatar" src="${currentUser.image.webp}" alt="${currentUser.username}'s avatar">
             <div class="btn-group">
