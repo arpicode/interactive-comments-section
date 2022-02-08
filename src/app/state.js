@@ -78,14 +78,47 @@ export class State {
 
     scoreMessage(msgId, action) {
         const message = this.getMessageById(msgId)
+        let hasStateChanded = false
+
         if (message) {
+            if (!message.voters) message.voters = []
+
             if (message.user.username !== this.currentUser.username) {
-                action === 'upvote' ? message.score++ : message.score--
+                // check the vote of current user for this message
+                let voteIndex = message.voters.findIndex(
+                    (v) => v.username === this.currentUser.username
+                )
+
+                if (voteIndex === -1) {
+                    // User never voted, initialize his/her vote
+                    voteIndex =
+                        message.voters.push({ username: this.currentUser.username, value: 0 }) - 1
+                }
+
+                if (action === 'upvote') {
+                    if (message.voters[voteIndex].value < 1) {
+                        message.score++
+                        message.voters[voteIndex].value++
+                        hasStateChanded = true
+                    } else {
+                        console.log(`%cYou've already upvoted this message.`, 'color: #e6b079;')
+                    }
+                }
+
+                if (action === 'downvote') {
+                    if (message.voters[voteIndex].value > -1) {
+                        message.score--
+                        message.voters[voteIndex].value--
+                        hasStateChanded = true
+                    } else {
+                        console.log(`%cYou've already downvoted this message.`, 'color: #e6b079;')
+                    }
+                }
             } else {
                 console.log(`%cYou can't vote for your own messages.`, 'color: #e6b079;')
             }
         }
-        this.saveState()
+        if (hasStateChanded) this.saveState()
     }
 
     _createComment(commentContent) {
